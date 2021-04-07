@@ -1,1 +1,1 @@
-web : waitress-server --port=8000  finalproject.wsgi:application
+web : waitress-server--port=$PORT finalproject.wsgi:application
