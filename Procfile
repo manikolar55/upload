@@ -1,0 +1,1 @@
+web : waitress-server --port=8000  finalproject.wsgi:application

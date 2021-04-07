@@ -1,0 +1,119 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="{% static 'https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js' %}"></script>
+  <script src="{% static 'https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js' %}"></script>
+<style>
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+</style>
+  <style>
+.dropbtn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {background-color: #ddd;}
+
+.dropdown:hover .dropdown-content {display: block;}
+
+.dropdown:hover .dropbtn {background-color: #3e8e41;}
+</style>
+</head>
+<body>
+
+
+<div class="dropdown">
+  <button class="dropbtn">MENU</button>
+  <div class="dropdown-content">
+    <a href="server_page">HOME</a>
+    <a href="#">PRODUCTS</a>
+    <a href="#">CONTACT US</a>
+     <a href="#">ABOUT US</a>
+    <a href="logout">LOGOUT</a>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-3"></div>
+    <div class="col-6">
+<h1>Server Page</h1>
+</div></div>
+<form action="country" method="POST">
+    {% csrf_token %}
+  <label >Select Country:</label>
+ <select name="country_name">
+    {% for coun in all_countries %}
+
+    <optgroup >
+
+      <option value={{coun.CountryID}}>{{coun.CountryName}}</option>
+      {% endfor %}
+    </optgroup>
+
+  </select>
+  <br><br>
+  <button>SUBMIT</button>
+
+</form>
+  
+  <button><a href="{% url 'city' %}">ADD CITIES</a></button>
+<table style="width:50%">
+  <tr>
+    <th>ID</th>
+    <th>City Name</th>
+  </tr>
+
+   {% for city in all_cities %}
+  <tr>
+    <td>{{city.id}}</td>
+    <td>{{city.cityname}}</td>
+    <td><a href="update/{{city.id}}">Edit </a></td>
+    <td><a href="delete/{{city.id}}">Delete </a></td>
+
+    {% endfor %}
+  </tr>
+
+</table>
+{% for updte in updatecity %}
+  {{updte.id}}
+  {{updte.cityname}}
+  {% endfor %}
+
+</div>
+
+
+ </body>
+</html>
