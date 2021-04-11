@@ -95,6 +95,10 @@ def countries(request):
         if city_names.objects.filter(countryname_id=value).exists():
             all_cities=city_names.objects.filter(countryname_id=value)
             return render(request,'server_page.html',{'country_id':value, 'all_cities': all_cities})
+        else:
+            return render(request,'enter_city.html',{'values':value})
+
+
     else:
         return render(request,'server_page.html')
 
@@ -102,13 +106,9 @@ def enter_city(request):
     if request.method == 'POST':
         name=request.POST['name']
         country = request.POST['country']
-        if city_names.objects.filter(cityname=name).exists():
-            messages.info(request,'city name is already enter')
-            return redirect('enter_city')
-        else:
-            user=city_names(cityname=name,countryname_id=country)
-            user.save()
-            return redirect('server_page')
+        user=city_names(cityname=name,countryname_id=country)
+        user.save()
+        return redirect('server_page')
     else:
         return render(request,'enter_city.html')
 def city(request):
