@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>server product</title>
+<div>
+<a href="add_product_server ">Add products</a>
+</div>
+        {% for al in all %}
+    <div>
+
+        <img src="{{al.img.url}}"  width="500" height="500">
+
+    </div>
+    <div>{{al.name}}</div>
+    <div>{{al.desc}}</div>
+    <div>{{al.price}}</div>
+    <td><a href="server_update/{{al.id}}">Edit </a></td><br>
+    <td><a href="server_delete/{{al.id}}">Delete </a></td>
+    {% endfor %}
+</head>
+<body>
+
+</body>
+</html>

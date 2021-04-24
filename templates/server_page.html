@@ -58,7 +58,7 @@ table, th, td {
   <button class="dropbtn">MENU</button>
   <div class="dropdown-content">
     <a href="server_page">HOME</a>
-    <a href="#">PRODUCTS</a>
+    <a href="server_product">PRODUCTS</a>
     <a href="#">CONTACT US</a>
      <a href="#">ABOUT US</a>
     <a href="logout">LOGOUT</a>
@@ -85,12 +85,17 @@ table, th, td {
 
   </select>
   <br><br>
-  <button>SUBMIT</button>
+  <button>Show Cities</button>
+
+
+
 
 </form>
-  
-  <button><a href="{% url 'city' %}">ADD CITIES</a></button>
-<table style="width:50%">
+    {% for mess in messages %}
+    {{mess}}
+    {% endfor %}
+  <a href='show_city'>Add cities </a>
+ <table style="width:50%">
   <tr>
     <th>ID</th>
     <th>City Name</th>
@@ -103,6 +108,8 @@ table, th, td {
     <td><a href="update/{{city.id}}">Edit </a></td>
     <td><a href="delete/{{city.id}}">Delete </a></td>
 
+<!--      <td><a href="country}">ADD </a></td>-->
+
     {% endfor %}
   </tr>
 
@@ -111,6 +118,8 @@ table, th, td {
   {{updte.id}}
   {{updte.cityname}}
   {% endfor %}
+
+
 
 </div>
 

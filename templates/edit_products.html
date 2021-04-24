@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Product</title>
+</head>
+<body>
+<center>
+
+
+
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+    <table border="1">
+
+        {{students}}
+    </table>
+    <input type="submit" value="submit">
+    <a href="{% url 'server_product'  %}">Go to Home Page</a>
+        </form>
+</center>
+</body>
+</html>

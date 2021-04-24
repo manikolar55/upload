@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Show City</title>
+</head>
+<body>
+<!--<form action="country" method="POST">-->
+<!--    {% csrf_token %}-->
+<!--  <label >Select Country:</label>-->
+<!-- <select name="country_name">-->
+<!--    {% for coun in all_countries %}-->
+
+<!--    <optgroup >-->
+
+<!--      <option value={{coun.CountryID}}>{{coun.CountryName}}</option>-->
+<!--      {% endfor %}-->
+<!--    </optgroup>-->
+
+<!--  </select>-->
+<!--  <br><br>-->
+<!--  <button>SUBMIT</button>-->
+
+<!--</form>-->
+ <button><a href="{% url 'city' %}">ADD CITIES</a></button>
+<table style="width:50%">
+  <tr>
+    <th>ID</th>
+    <th>City Name</th>
+  </tr>
+
+   {% for city in all_cities %}
+  <tr>
+    <td>{{city.id}}</td>
+    <td>{{city.cityname}}</td>
+    <td><a href="update/{{city.id}}">Edit </a></td>
+    <td><a href="delete/{{city.id}}">Delete </a></td>
+<!--      <td><a href="country}">ADD </a></td>-->
+
+    {% endfor %}
+  </tr>
+
+</table>
+{% for updte in updatecity %}
+  {{updte.id}}
+  {{updte.cityname}}
+  {% endfor %}
+
+</body>
+</html>
