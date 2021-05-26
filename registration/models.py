@@ -40,4 +40,18 @@ class user_signup(models.Model):
     email = models.EmailField()
     password1 = models.CharField(max_length=20)
     password2 = models.CharField(max_length=20)
+class serverice_table(models.Model):
+    services=models.CharField(max_length=20)
+class orders(models.Model):
+    username=models.CharField(max_length=20)
+    product_names=models.CharField(max_length=20)
+    product_descriptions=models.CharField(max_length=20)
+    product_service=models.CharField(max_length=20)
+    approved=models.CharField(max_length=20)
+    email=models.EmailField()
+class approveds_orders(models.Model):
+    username=models.CharField(max_length=20)
+    email=models.EmailField()
+    approved=models.CharField(max_length=20)
+    date=models.DateTimeField(auto_now_add=True)
 

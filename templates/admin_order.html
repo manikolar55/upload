@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Order</title>
+</head>
+<body>
+<div class="dropdown">
+  <button class="dropbtn">MENU</button>
+  <div class="dropdown-content">
+    <a href="{% url 'admin_home' %}">HOME</a>
+    <a href="#">PRODUCTS</a>
+    <a href="#">CONTACT US</a>
+    <a href="#">ABOUT US</a>
+  </div>
+{% for al in all %}
+<div>{{al.username}}</div>
+<div>{{al.product_names}}</div>
+<div>{{al.product_descriptions}}</div>
+<div>{{al.product_service}}</div>
+<td><a href="approve_order/{{al.id}}">Approved Orders</a></td><br>
+{% endfor %}
+
+</body>
+</html>

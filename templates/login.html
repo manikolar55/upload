@@ -1,4 +1,5 @@
 {% load static %}
+{% load socialaccount %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -142,8 +143,11 @@ span.psw {
       <input type="checkbox" checked="checked" name="remember"> Remember me
     </label>
     <span class="psw">Forgot <a href="#">password?</a></span>
-  </div>  
+  </div>
+  <a href="{% provider_login_url 'google' %}">google</a>
 </form>
+
+
   {%for message in messages %}
 <h3>  {{message}}</h3>
 {% endfor %}

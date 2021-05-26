@@ -1,15 +1,17 @@
-
+from django.core.mail import send_mail
 from django.shortcuts import render,redirect,HttpResponse
 from django.contrib import messages
 from django.contrib.auth.models import User,auth
 from .models import server_loogin,Foo,country_name,city_names,server_products
 from .forms import edit_cityy
-from .forms import DocumentForm
-from .models import user_signup
+from .forms import DocumentForm,orders_approve
+from .models import user_signup,serverice_table,orders,approveds_orders
 dataaa=0
-
+list=''
+list1=[]
 def index(request):
-    return render(request,'index.html')
+    sign=list
+    return render(request,'index.html',{'username':sign})
 
 # Create your views here.
 def signup(request):
@@ -20,6 +22,7 @@ def signup(request):
         email = request.POST['email']
         password1 = request.POST['password1']
         password2 = request.POST['password2']
+
         if password1 == password2:
             if User.objects.filter(username=username).exists():
                 messages.info(request,'Username is already taken')
@@ -79,20 +82,36 @@ def login(request):
             # else:
             #     messages.info(request,'wrong information')
             #     return redirect('login')
-        if username[0] == 's':
+        if username == 'admin12' and password == '123':
+            return redirect('admin_home')
+        elif username[0] == 's':
             if server_loogin.objects.filter(username=username).exists() & server_loogin.objects.filter(
                     password1=password).exists():
-                return redirect('server_page')
+                global list1
+                list1=[]
+                list1=username
+                sign1=list1
+                all_countries = country_name.objects.all()
+                return render(request, 'server_page.html', {'all_countries': all_countries,'server_name':sign1})
+                # return redirect('server_page')
             else:
                 messages.info(request, 'Wrong Information')
-                return redirect('login')
+                return redirect("login")
         else:
-            if user_signup.objects.filter(username=username).exists() & user_signup.objects.filter(
-                    password1=password).exists():
-                return redirect('/')
+            # if user_signup.objects.filter(username=username).exists() & user_signup.objects.filter(
+            #         password1=password).exists():
+            #     global list
+            #     list=username
+            #     sign=list
+            #     return render(request,'index.html',{'username':sign})
+            user = auth.authenticate(username=username, password=password)
+            if user is not None:
+                auth.login(request,user)
+                return render(request, 'index.html')
             else:
-                messages.info(request, 'Wrong Information')
+                messages.info(request,'wrong information')
                 return redirect('login')
+
 
 
 
@@ -100,7 +119,14 @@ def login(request):
         return render(request,'login.html')
 def logout(request):
         auth.logout(request)
+
         return redirect("/")
+def admin_logout(request):
+    auth.logout(request)
+    return redirect("/")
+def server_logout(request):
+    auth.logout(request)
+    return redirect("/")
 def server_reg(request):
     if request.method == "POST":
         first_name = request.POST['first_name']
@@ -121,27 +147,27 @@ def server_reg(request):
                                                 email=email, password1=password1)
                 user.save()
                 print('user created')
-                return render(request, 'index.html')
+                return redirect('admin_home')
         else:
             messages.info(request, 'password is not matching')
             return redirect('server_reg')
     else:
         return render(request, 'server_registration.html')
-def server_login(request):
-        if request.method == 'POST':
-            username=request.POST['username']
-            password1=request.POST['password']
-            if server_loogin.objects.filter(username=username).exists() & server_loogin.objects.filter(password1=password1).exists():
-                return redirect('server_page')
-            else:
-                messages.info(request,'Wrong Information')
-                return redirect('server_login')
-        else:
-            return render(request,'serverlogin.html')
+# def server_login(request):
+#         if request.method == 'POST':
+#             username=request.POST['username']
+#             password1=request.POST['password']
+#             if server_loogin.objects.filter(username=username).exists() & server_loogin.objects.filter(password1=password1).exists():
+#                 return redirect('server_page')
+#             else:
+#                 messages.info(request,'Wrong Information')
+#                 return redirect('server_login')
+#         else:
+#             return render(request,'serverlogin.html')
 def server_page(request):
         all_countries=country_name.objects.all()
-
-        return render(request,'server_page.html',{'all_countries':all_countries})
+        server_name=list1
+        return render(request,'server_page.html',{'all_countries':all_countries,'server_name':server_name})
 
 def countries(request):
     if request.method == 'POST':
@@ -221,8 +247,8 @@ def add(request,id):
         return redirect('enter_city')
 def server_product(request):
     all=server_products.objects.all()
-
-    return render(request,'server_product.html',{'all':all})
+    server_name=list1
+    return render(request,'server_product.html',{'all':all,'server_name':server_name})
 def add_product_server(request):
     return render(request,'add_product_server.html')
 
@@ -292,3 +318,72 @@ def server_update(request,id):
     else:
         context={'form':form}
         return render(request,'edit_products.html',{'students':form})
+
+#show products to user
+def user_product(request):
+    all=server_products.objects.all()
+    service=serverice_table.objects.all()
+    sign=list
+    return render(request,'user_products.html',{'all':all,'username':sign,'service':service})
+def admin_home(request):
+    return render(request,'Admin_home.html')
+def user_order(request):
+    if request.method == 'POST':
+        if User.is_authenticated :
+            userss=request.POST['userss']
+            name=request.POST['name']
+            description=request.POST['desc']
+            service=request.POST['service']
+            email=request.POST['email']
+            user=orders(username=userss,product_names=name,product_descriptions=description,product_service=service,email=email)
+            user.save()
+            all = server_products.objects.all()
+            service = serverice_table.objects.all()
+            return render(request, 'user_products.html',{'all':all,'service':service})
+        else:
+            messages.info(request,'please login')
+            return render(request,'user_products.html')
+    else:
+        return redirect('index')
+def admin_order(request):
+    all=orders.objects.all()
+    return render(request,'admin_order.html',{'all':all})
+def approve_order(request,id):
+    # updatecity = orders.objects.get(id=id)
+    if orders.objects.filter(id=id).exists():
+        order_id=orders.objects.filter(id=id)
+        print(f'order is {order_id}')
+        return render(request,'approved_products.html',{'orders':order_id})
+    else:
+        return redirect('approve_order')
+    # form = orders_approve(instance=updatecity)
+    # if request.method == 'POST':
+    # 
+    #     form = orders_approve(request.POST, instance=updatecity)
+    #     if form.is_valid():
+    #         form.save()
+    #     return redirect('admin_order')
+    # else:
+    #     context = {'form': form}
+    #     return render(request, 'approved_products.html', {'students': form})
+def approved_order(request):
+    if request.method == 'POST':
+
+            username=request.POST['userss']
+
+
+            approved=request.POST['approved']
+            email=request.POST['email']
+            user=approveds_orders(username=username,approved=approved,email=email)
+            user.save()
+            send_mail(
+                'APPROVED ORDER',
+                'Your Order is approved you recivied in 3 monthns.',
+                'mani.kolar55@gmail.com',
+                [email],
+                fail_silently=False,
+            )
+            return redirect('admin_home')
+    else:
+        return redirect('admin_order')
+

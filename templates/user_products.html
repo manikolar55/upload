@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Prooduct</title>
+    <style>
+        .dropbtn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {background-color: #ddd;}
+
+.dropdown:hover .dropdown-content {display: block;}
+
+.dropdown:hover .dropbtn {background-color: #3e8e41;}
+    </style>
+</head>
+<body>
+<div class="dropdown">
+  <button class="dropbtn">MENU</button>
+  <div class="dropdown-content">
+    <a href="index">HOME</a>
+    <a href="{% url 'user_product' %}">PRODUCTS</a>
+    <a href="#">CONTACT US</a>
+    <a href="#">ABOUT US</a>
+<!--    {%if user.is_authenticated %}-->
+<!--    <li>Hello {{user.first_name}}</li>-->
+<!--    <a href="registration/logout">LOGOUT</a>-->
+<!--    <a href="registration/server_reg">SERVER REGISTRATION</a>-->
+
+
+<!--    {% else %}-->
+
+
+
+<!--     {% endif %}-->
+       {% if user.is_authenticated%}
+    <li>hello {{user.username}}</li>
+    <a href="{% url 'logout' %}">LOGOUT</a>
+    {% else %}
+    <a href="{% url 'login' %}">LOGIN</a>
+    <a href="{% url 'users_signup' %}">SIGN UP</a>
+    {% endif %}
+
+  </div>
+</div>
+<form method="post" action="user_order">
+  {% csrf_token %}
+  {% for al in all %}
+    <div>
+
+        <img src="{{al.img.url}}"  width="500" height="500">
+
+    </div>
+
+    <input type="hidden" id="userss" name="userss" value={{user.username}} readonly>
+   <input type="text" id="name" name="name" value={{al.name}} readonly>
+    <input type="hidden" id="email" name="email" value={{user.email}} readonly>
+  <div><textarea id="desc" name="desc" rows="2" cols="22" readonly>{{al.desc}}</textarea></div>
+
+
+   <label >Select Service :</label>
+  <select name="service">
+    {% for coun in service %}
+
+    <optgroup >
+
+      <option value={{coun.services}}>{{coun.services}}</option>
+      {% endfor %}
+    </optgroup>
+
+    </select>
+
+    <div><button>Order</button></div>
+
+    </form>
+
+    {% endfor %}
+
+</body>
+</html>
