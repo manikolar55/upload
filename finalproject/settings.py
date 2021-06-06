@@ -14,6 +14,7 @@ from pathlib import Path
 import os
 import django_heroku
 
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -27,7 +28,7 @@ SECRET_KEY = 's7&p0f@7h%bo4-o92*p3v838+9hdn-2cww4f9xoz()97==a4o6'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [ ]
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -53,7 +54,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
+
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -86,13 +87,23 @@ WSGI_APPLICATION = 'finalproject.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'FYP',
+#         'USER': 'postgres',
+#         'PASSWORD':'1234',
+#         'HOST':'localhost'
+#     }
+# }
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'FYP',
-        'USER': 'postgres',
-        'PASSWORD':'1234',
-        'HOST':'localhost'
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'fyp',
+        'HOST': '127.0.0.1',
+        'PORT': '3306',
+        'USER': 'root',
+        'PASSWORD': '1234',
     }
 }
 AUTHENTICATION_BACKENDS = [
@@ -173,4 +184,4 @@ EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER ='mani.kolar55@gmail.com'
 EMAIL_HOST_PASSWORD = 'MANIma1234'
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
