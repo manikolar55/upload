@@ -11,6 +11,8 @@ urlpatterns = [
     path('server_reg',views.server_reg,name='server_reg'),
     # path('server_login',views.server_login,name='server_login'),
     path('server_page',views.server_page,name='server_page'),
+    path('admin_user',views.admin_user,name='admin_user'),
+    path('admin_showServiceProvider',views.admin_showServiceProvider,name='admin_showServiceProvider'),
     path('city',views.city,name='city'),
     path('enter_city',views.enter_city,name='enter_city'),
     path('Edit/<int:id>',views.edit_city,name='edit_city'),
@@ -33,7 +35,8 @@ urlpatterns = [
     path('user_order', views.user_order, name='user_order'),
     path('admin_order', views.admin_order, name='admin_order'),
     path('approve_order/<int:id>',views.approve_order,name='approve_order'),
-    path('approved_order',views.approved_order,name='approved_order')
+    path('approved_order',views.approved_order,name='approved_order'),
+    path('admin_product',views.admin_product,name='admin_product'),
 
     # path('success', views.success, name = 'success'),
 

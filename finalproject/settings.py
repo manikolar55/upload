@@ -13,7 +13,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 from pathlib import Path
 import os
 import django_heroku
-
+import stripe
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
+    'payments.apps.PaymentsConfig',
 ]
 
 MIDDLEWARE = [
@@ -185,3 +186,5 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER ='mani.kolar55@gmail.com'
 EMAIL_HOST_PASSWORD = 'MANIma1234'
 # STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STRIPE_PUBLISHABLE_KEY = 'pk_test_51J1XLlClQTIBmbVCT0Z2loFYh24d4cltp3qxMDLxoNZdAHLaYCOvfQvCn6W9htzqYYvcovP1f45JrAZ28seXs0J300WQ3pPdlj'
+STRIPE_SECRET_KEY = 'sk_test_51J1XLlClQTIBmbVCQi14kYStfSSkr6IhQVKVvD1L6UaHscPCpce6wlMbgS0Ij5MjTcK9Y32F7ecR3dROSlDXK4ge00vfqfj1uY'

@@ -1,51 +1,282 @@
+{% load static %}
+{% load socialaccount %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>approved products</title>
-</head>
-<body>
-<div class="dropdown">
-  <button class="dropbtn">MENU</button>
-  <div class="dropdown-content">
-    <a href="{% url 'admin_home' %}">HOME</a>
-    <a href="#">PRODUCTS</a>
-    <a href="#">CONTACT US</a>
-    <a href="#">ABOUT US</a>
-  </div>
-<!--<center>-->
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Final year Project | Admin Panel</title>
+    <link
+      rel="stylesheet"
+      href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+      integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
+      crossorigin="anonymous"
+    />
 
+    <link rel="stylesheet" href="{% static './css/Responsive css Service.css'%}" />
+    <link rel="stylesheet" href="{% static './css/styleService.css'%}" />
+  </head>
+  <body>
+    <main>
+      <div class="container-fluid">
+        <nav
+          id="top-navigation"
+          class="navbar navbar-expand-md navbar-dark bg-dark fixed-top"
+        >
+          <a href="index.html" class="navbar-brand"> Admin Panel </a>
+          <button
+            class="navbar-toggler"
+            data-toggle="collapse"
+            data-target="#navCollapse"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navCollapse">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a href="index.html" class="nav-link active">Dashboard</a>
+              </li>
+              <li class="nav-item">
+                <a href="addproduct.html" class="nav-link">Products</a>
+              </li>
+              <li class="nav-item">
+                <a href="adduser.html" class="nav-link">Users</a>
+              </li>
+              <li class="nav-item">
+                <a href="addserviceproviders.html" class="nav-link"
+                  >Service Providers</a
+                >
+              </li>
+              <li class="nav-item">
+                <a href="addservice.html" class="nav-link">Service</a>
+              </li>
+            </ul>
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item"><a class="nav-link">Welcome Mohsin</a></li>
+              <li class="nav-item">
+                <a href="login_admin.html" class="nav-link">
+                  <i class="far fa-user"></i> Login
+                </a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+      <div id="middle-navigation" class="navbar-dark">
+        <h1 class="d-inline">
+          <i class="fas fa-cog"></i> Add Service Providers
+        </h1>
+        <p class="lead mb-0 d-inline ml-2">
+          Manage Your Site Service Providers
+        </p>
+      </div>
+    </main>
+    <section id="admin-content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-2 fixed-left bg-dark">
+           <nav id="aside-navigation" class="navbar navbar-dark">
+              <a href="index.html" class="navbar-brand">
+                <i class="fas fa-hand-holding-water mine-size text-primary"></i>
+                Water Services
+              </a>
 
+              <ul class="navbar-nav pt-3">
+                <small class="text-light">Pages</small>
+                <li class="list-item">
+                  <a href="index.html" class="active nav-link">
+                    <i class="fas fa-tachometer-alt"></i>
+                    Dashboard
+                  </a>
+                </li>
+                <li class="list-item dropdown">
+                  <div class="dropdown">
+                    <a
+                      class="nav-link dropdown-toggle"
+                      href="#"
+                      role="button"
+                      id="dropdownMenuLink"
+                      data-toggle="dropdown"
+                      aria-haspopup="true"
+                      aria-expanded="false"
+                    >
+                      <i class="fas fa-project-diagram"></i> Products
+                    </a>
 
-<!--    <form method="POST">-->
-<!--        {% csrf_token %}-->
-<!--    <table border="1">-->
+                    <div
+                      class="dropdown-menu"
+                      aria-labelledby="dropdownMenuLink"
+                    >
+                      <a class="dropdown-item" href="editproduct.html"
+                        >Add Product
+                      </a>
+                       <a class="dropdown-item" href="{%   url 'admin_order'%}"
+                        >Show Product</a
+                      >
 
-<!--        {{students}}-->
-<!--    </table>-->
-<!--    <input type="submit" value="submit">-->
-<!--    <a href="{% url 'server_product'  %}">Go to Home Page</a>-->
-<!--        </form>-->
-<!--</center>-->
-<form action="{% url 'approved_order' %}" method="post" >
-    {% csrf_token %}
-    {% for od in orders %}
-    <input type="text" id="userss" name="userss" value={{od.username}} >
-    <input type="text" id="email" name="email" value={{od.email}} readonly>
+                    </div>
+                  </div>
+                </li>
 
-    <input type="text" id="desc" name="desc" value={{od.product_descriptions}} readonly>
+                <li class="list-item dropdown">
+                  <div class="dropdown">
+                    <a
+                      class="nav-link dropdown-toggle"
+                      href="#"
+                      role="button"
+                      id="dropdownMenuLink"
+                      data-toggle="dropdown"
+                      aria-haspopup="true"
+                      aria-expanded="false"
+                    >
+                      <i class="far fa-user"></i> Users
+                    </a>
 
-    <div> <input type="text" id="service" name="service" value={{od.product_service}} readonly></div>
-    <div><input type="text" id="name" name="name" value={{od.product_names}} readonly></div>
-     <p>Please Approved the Order:</p>
+                    <div
+                      class="dropdown-menu"
+                      aria-labelledby="dropdownMenuLink"
+                    >
+                      <a class="dropdown-item" href="{% url 'admin_user' %}"
+                        >Show User</a
+                      >
 
+                    </div>
+                  </div>
+                </li>
 
+                <li class="list-item dropdown">
+                  <div class="dropdown">
+                    <a
+                      class="nav-link dropdown-toggle"
+                      href="#"
+                      role="button"
+                      id="dropdownMenuLink"
+                      data-toggle="dropdown"
+                      aria-haspopup="true"
+                      aria-expanded="false"
+                    >
+                      <i class="fas fa-poll-h"></i> Service Providers
+                    </a>
 
-   <input type="checkbox" id="approved" name="approved" value="approved">
-  <label for="approved">Approve</label><br>
+                    <div
+                      class="dropdown-menu"
+                      aria-labelledby="dropdownMenuLink"
+                    >
+                      <a class="dropdown-item" href="{% url 'server_reg'%}"
+                        >Add Service Providers
+                      </a>
+                      <a class="dropdown-item" href="{% url 'admin_showServiceProvider' %}"
+                        >Show Service Providers</a
+                      >
 
-     {% endfor %}
-    <button>apporve</button>
-    </form>
-</body>
+                    </div>
+                  </div>
+                </li>
+
+              </ul>
+            </nav>
+          </div>
+          <div id="col-10" class="col-10 p-5">
+            <div class="card">
+              <div
+                class="card-body bg-dark text-light"
+                style="border-radius: 5px"
+              ><form action="{% url 'approved_order' %}" method="post" >
+                    {% csrf_token %}
+                    {% for od in orders %}
+
+                    <label for="name">userName</label>
+                    <input
+                      type="text"
+                      name="first_name"
+                      placeholder="Enter First Name"
+                      class="form-control"
+                      value={{od.username}}
+                    />
+                  <div class="form-group">
+                    <label for="email">EMAIL</label>
+                    <input
+                      type="text"
+                      name="last_name"
+                      placeholder="Enter Email"
+                      class="form-control"
+                      value={{od.email}}
+                    />
+                  </div>
+
+                  <div class="form-group">
+                    <label for="name">Description</label>
+                    <input
+                      type="text"
+                      name="Description"
+                      placeholder="Enter Description"
+                      class="form-control"
+                      value={{od.product_descriptions}}
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label for="name">Re-type Password</label>
+                    <input
+                      type="text"
+                      name="Service"
+                      placeholder="Service"
+                      class="form-control"
+                      value={{od.product_service}}
+                    />
+                  </div>
+
+                  <div class="form-group">
+                    <label for="name">Re-type Password</label>
+                    <input
+                      type="text"
+                      name="name"
+                      placeholder="name"
+                      class="form-control"
+                      value={{od.product_names}}
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label for="name">Approve Order</label>
+                    <input
+                      type="checkbox"
+                      name="approved"
+                      placeholder="name"
+                      class="form-control"
+                      value="approved"
+                    />
+                  </div>
+
+                 <button
+                    type="submit"
+                    class="btn btn-outline-primary d-block w-100"
+                  >
+                    Approved
+                  </button>
+                    {% endfor %}
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+         {%for message in messages %}
+            <h3>  {{message}}</h3>
+            {% endfor %}
+    </section>
+    <footer id="footer " class="text-center bg-mine text-light p-3">
+      <p class="mb-0">
+        Water Services Provider's &copy; All Rights Reserved | 2021
+      </p>
+    </footer>
+
+    <!-- Script Tag -->
+    <script
+      src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+      crossorigin="anonymous"
+    ></script>
+
+    <script src="{% static '/js/app1.js'%}"></script>
+  </body>
 </html>

@@ -1,106 +1,293 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>User Prooduct</title>
-    <style>
-        .dropbtn {
-  background-color: #4CAF50;
-  color: white;
-  padding: 16px;
-  font-size: 16px;
-  border: none;
-}
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+      integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
+      crossorigin="anonymous"
+    />
 
-.dropdown {
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+    <link rel="stylesheet" href="{% static '/Css/style.css'%}" />
+     <link rel="stylesheet" href="{% static 'css/productpage.css'%}" />
+      <link rel="stylesheet" href="{% static 'Responsive Css/bootstrap.min.css'%}" />
+    <link rel="stylesheet" href="{% static 'css/largescreen.css'%}" />
+    <link rel="stylesheet" href="{% static 'css/mediumscreen.css'%}" />
+    <link rel="stylesheet" href="{% static 'css/smallscreen.css'%}" />
+    <link rel="stylesheet" href="{% static 'css/mobile.css'%}" />
+    <link rel="stylesheet" href="{% static 'Izmir-master/izmir.min.css'%}" />
+
+    <title>Final Year Project | Products</title>
+  </head>
+  <style>
+
+#header-products {
+  padding-top: 80px;
+  margin-top: -25px;
+  height: 750px;
   position: relative;
-  display: inline-block;
+  z-index: 10;
+  background-color: #f3f3f3;
 }
 
-.dropdown-content {
-  display: none;
+#header-products::before {
+  content: "";
   position: absolute;
-  background-color: #f1f1f1;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+   background: url("{% static './images/Cart.jpg'%}") no-repeat center center/cover fixed;
+  z-index: 8;
+  clip-path: polygon(0 0, 100% 0, 100% 59%, 50% 100%, 0 59%);
 }
 
-.dropdown-content a {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
+#header-products::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  clip-path: polygon(0 0, 100% 0, 100% 59%, 50% 100%, 0 59%);
+  z-index: 9;
 }
 
-.dropdown-content a:hover {background-color: #ddd;}
+  </style>
+  <body>
 
-.dropdown:hover .dropdown-content {display: block;}
+   <header id="header-products">
+      <nav
+              style="margin-top: -60px; padding: 0px"
+        id="navigation"
+        class="navbar navbar-expand-md navbar-dark bg-dark fixed-top"
+      >
+        <div class="container">
+          <a href="{% url 'index'%}" class="navbar-brand">
+            <span class="text-primary"
+              ><i class="fas fa-hand-holding-water"></i> Water</span
+            >
+            Service's
+          </a>
 
-.dropdown:hover .dropbtn {background-color: #3e8e41;}
-    </style>
-</head>
-<body>
-<div class="dropdown">
-  <button class="dropbtn">MENU</button>
-  <div class="dropdown-content">
-    <a href="index">HOME</a>
-    <a href="{% url 'user_product' %}">PRODUCTS</a>
-    <a href="#">CONTACT US</a>
-    <a href="#">ABOUT US</a>
-<!--    {%if user.is_authenticated %}-->
-<!--    <li>Hello {{user.first_name}}</li>-->
-<!--    <a href="registration/logout">LOGOUT</a>-->
-<!--    <a href="registration/server_reg">SERVER REGISTRATION</a>-->
+          <button
+            class="navbar-toggler"
+            data-toggle="collapse"
+            data-target="#navcollapse"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navcollapse">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item">
+                <a href="{% url 'index'%}" class="active">Home</a>
 
+              <li class="nav-item"><a href="{% url 'user_product'%}">Products</a></li>
+              <li class="nav-item"><a href="{% url 'index'%}#about">About</a></li>
+              <li class="nav-item"><a href="{% url 'index'%}#contact">Contact</a></li>
+             <!--    {%if user.is_authenticated %}-->
+            <!--    <li>Hello {{user.first_name}}</li>-->
+            <!--    <a href="registration/logout">LOGOUT</a>-->
+            <!--    <a href="registration/server_reg">SERVER REGISTRATION</a>-->
 
-<!--    {% else %}-->
+            <!--    {% else %}-->
 
+            <!--     {% endif %}-->
+            {% if user.is_authenticated %}
+            <li style="color:white">hello {{user}}</li>
+            <li><a href="{% url 'logout' %}">LOGOUT</a></li>
+            {% else %}
+            <li><a href="{% url 'login' %}">LOGIN</a></li>
+            <li><a href="{% url 'users_signup' %}">SIGN UP</a></li>
+            {% endif %}
+            </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
 
+      <div class="container">
+        <div class="showcase-products">
+          <h1 class="m-heading animate__animated animate__zoomIn">Shop Now</h1>
+          <div
+            class="border-bottom-mine mb-3 animate__animated animate__slideInUp"
+          ></div>
+          <a
+            href="signup.html"
+            class="btn-mine nav-link mt-3 animate__animated animate__slideInUp"
+            >Join Now</a
+          >
+        </div>
+      </div>
 
-<!--     {% endif %}-->
-       {% if user.is_authenticated%}
-    <li>hello {{user.username}}</li>
-    <a href="{% url 'logout' %}">LOGOUT</a>
-    {% else %}
-    <a href="{% url 'login' %}">LOGIN</a>
-    <a href="{% url 'users_signup' %}">SIGN UP</a>
-    {% endif %}
+    </header>
 
-  </div>
-</div>
-<form method="post" action="user_order">
-  {% csrf_token %}
-  {% for al in all %}
-    <div>
+    <section id="product" class="py-5">
+      <h2 class="text-center">
+        Our <span class="text-primary">Products</span>
+      </h2>
+      {% for al in all %}
+      <div class="border-bottom-mine"></div>
+      <div class="container">
+        <div class="row mt-3">
+          <div class="col-md-4 mb-3">
+            <div class="card">
+              <div class="card-body">
+                <figure
+                  class="
+                    c4-izmir
+                    c4-border-bottom-left
+                    c4-image-rotate-right
+                    c4-gradient-top-left
+                  "
+                  style="
+                    --primary-color: #000046;
+                    --secondary-color: #1cb5e0;
+                    --border-width: 5px;
+                  "
+                >
+                  <img src="{{al.img.url}}" alt="Sample Image" />
+                  <figcaption>
+                    <a href="" class="btn-mine nav-link">Request Now</a>
+                  </figcaption>
+                </figure>
+                <div class="card-mine">
+                  <h3>First <span class="text-primary">{{al.name}}</span></h3>
+                  <p>
+                    {{al.disc}}
+                  </p>
+                  <p class="lead">{{al.desc}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+{% endfor %}
 
-        <img src="{{al.img.url}}"  width="500" height="500">
+    </section>
 
-    </div>
+    <section id="up-comming" class="py-5">
+      <h2 class="text-center">
+        UpComming <span class="text-primary">Products</span>
+      </h2>
+      <div class="border-bottom-mine"></div>
+      <div class="container">
+        <div class="row pt-5">
+          <div class="col-md-4 mb-4">
+            <a href="https://source.unsplash.com/random/560x560">
+              <img
+                class="img-fluid"
+                src="https://source.unsplash.com/random/560x560"
+                alt=""
+              />
+            </a>
+          </div>
+          <div class="col-md-4 mb-4">
+            <a href="https://source.unsplash.com/random/561x561">
+              <img
+                class="img-fluid"
+                src="https://source.unsplash.com/random/561x561"
+                alt=""
+              />
+            </a>
+          </div>
+          <div class="col-md-4 mb-4">
+            <a href="https://source.unsplash.com/random/562x562">
+              <img
+                class="img-fluid"
+                src="https://source.unsplash.com/random/562x562"
+                alt=""
+              />
+            </a>
+          </div>
+        </div>
 
-    <input type="hidden" id="userss" name="userss" value={{user.username}} readonly>
-   <input type="text" id="name" name="name" value={{al.name}} readonly>
-    <input type="hidden" id="email" name="email" value={{user.email}} readonly>
-  <div><textarea id="desc" name="desc" rows="2" cols="22" readonly>{{al.desc}}</textarea></div>
+        <div class="row">
+          <div class="col-md-4 mb-4">
+            <a href="https://source.unsplash.com/random/563x563">
+              <img
+                class="img-fluid"
+                src="https://source.unsplash.com/random/563x563"
+                alt=""
+              />
+            </a>
+          </div>
+          <div class="col-md-4 mb-4">
+            <a href="https://source.unsplash.com/random/564x564">
+              <img
+                class="img-fluid"
+                src="https://source.unsplash.com/random/564x564"
+                alt=""
+              />
+            </a>
+          </div>
+          <div class="col-md-4 mb-4">
+            <a href="https://source.unsplash.com/random/565x565">
+              <img
+                class="img-fluid"
+                src="https://source.unsplash.com/random/565x565"
+                alt=""
+              />
+            </a>
+          </div>
+        </div>
 
+        <div class="row">
+          <div class="col-md-4 mb-4">
+            <a href="https://source.unsplash.com/random/566x566">
+              <img
+                class="img-fluid"
+                src="https://source.unsplash.com/random/566x566"
+                alt=""
+              />
+            </a>
+          </div>
+          <div class="col-md-4 mb-4">
+            <a href="https://source.unsplash.com/random/567x567">
+              <img
+                class="img-fluid"
+                src="https://source.unsplash.com/random/567x567"
+                alt=""
+              />
+            </a>
+          </div>
+          <div class="col-md-4 mb-4">
+            <a href="https://source.unsplash.com/random/568x568">
+              <img
+                class="img-fluid"
+                src="https://source.unsplash.com/random/568x568"
+                alt=""
+              />
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
 
-   <label >Select Service :</label>
-  <select name="service">
-    {% for coun in service %}
+    <footer id="footer" class="bg-dark">
+      <p class="text-center text-light">
+        Water Service Providers &copy; All Rights Reserved | 2021
+      </p>
+    </footer>
 
-    <optgroup >
+    <!-- js -->
 
-      <option value={{coun.services}}>{{coun.services}}</option>
-      {% endfor %}
-    </optgroup>
-
-    </select>
-
-    <div><button>Order</button></div>
-
-    </form>
-
-    {% endfor %}
-
-</body>
+    <script
+      src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+      crossorigin="anonymous"
+    ></script>
+    <script src="{% static '/js/bootstrap.min.js'%}"></script>
+    <script src="{% static '/js/bootstrap.bundle.min.js'%}"></script>
+  </body>
 </html>
+
+

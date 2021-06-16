@@ -84,7 +84,7 @@ def login(request):
             #     return redirect('login')
         if username == 'admin12' and password == '123':
             return redirect('admin_home')
-        elif username[0] == 's':
+        elif username[0] == '@':
             if server_loogin.objects.filter(username=username).exists() & server_loogin.objects.filter(
                     password1=password).exists():
                 global list1
@@ -252,6 +252,11 @@ def server_product(request):
 def add_product_server(request):
     return render(request,'add_product_server.html')
 
+def admin_user(request):
+    return render(request,'admin_user.html')
+def admin_showServiceProvider(request):
+    return render(request,'admin_showServiceProvider.html')
+
 
 # def add_products(request):
 #     if request.method == 'POST':
@@ -358,7 +363,7 @@ def approve_order(request,id):
         return redirect('approve_order')
     # form = orders_approve(instance=updatecity)
     # if request.method == 'POST':
-    # 
+    #
     #     form = orders_approve(request.POST, instance=updatecity)
     #     if form.is_valid():
     #         form.save()
@@ -387,3 +392,7 @@ def approved_order(request):
     else:
         return redirect('admin_order')
 
+def admin_product(request):
+    all = server_products.objects.all()
+
+    return render(request, 'admin_product.html', {'all': all})
