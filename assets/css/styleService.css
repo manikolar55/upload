@@ -1,0 +1,98 @@
+/* Css reset */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Utilities */
+
+.mine-size {
+  font-size: 2rem;
+}
+
+.bg-mine {
+  background: #333;
+}
+
+.admin-header {
+  margin-top: 40px;
+}
+
+.dashboard-badges {
+  background: dodgerblue;
+  color: #fff;
+  padding: 1rem 1rem;
+  border-radius: 5px;
+}
+
+.dashboard-badges-black {
+  background: #343a40;
+  color: #fff;
+  padding: 1rem 1rem;
+  border-radius: 5px;
+}
+
+.dropdown-item:hover {
+  background: dodgerblue;
+}
+
+.dropdown-menu {
+  background: none;
+  border: none;
+}
+.dropdown-menu .dropdown-item {
+  color: #fff;
+}
+
+/* top navigation */
+#top-navigation {
+  padding: 0 1rem;
+}
+#top-navigation .nav-item .nav-link {
+  transition: all 0.3s ease;
+}
+
+#top-navigation .nav-item .nav-link:focus {
+  background-color: dodgerblue;
+  color: #fff;
+}
+
+.navbar-toggler {
+  border: none;
+}
+
+.navbar-toggler:focus {
+  outline: none;
+}
+
+/* Middle Navigation */
+
+#middle-navigation {
+  background: dodgerblue;
+  margin-top: 40px;
+  padding: 1rem 1rem;
+  color: #fff;
+}
+
+/* Main styling */
+
+#admin-content {
+  background-color: #eff2f6;
+}
+
+#col-10 {
+  padding: 2rem 1rem;
+}
+
+#aside-navigation {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+/* Form */
+
+#form {
+  height: 70vh;
+}

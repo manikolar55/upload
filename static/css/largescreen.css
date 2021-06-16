@@ -1,0 +1,13 @@
+@media screen and (min-width: 991px) and (max-width: 1199px) {
+  .box-1 {
+    height: 530px;
+  }
+
+  .box-2 {
+    height: 530px;
+  }
+
+  .box-3 {
+    height: 530px;
+  }
+}
